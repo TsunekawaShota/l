@@ -1,0 +1,175 @@
+/* General Body Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+.header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    border-bottom: #77aaff 3px solid;
+}
+
+.header .product-name {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.header .main-nav {
+    float: right;
+    margin-top: 10px;
+}
+
+.header .main-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.header .main-nav li {
+    display: inline;
+    padding: 0 15px;
+}
+
+.header .main-nav a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.header .main-nav a:hover {
+    color: #77aaff;
+    font-weight: bold;
+}
+
+/* Section Styles */
+section {
+    padding: 40px 0;
+    margin-bottom: 20px;
+    background: #fff;
+    border-bottom: #ddd 1px solid;
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+.section-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    background: #e4e4e4;
+    padding: 60px 0;
+}
+
+.hero-section .catchphrase {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.hero-section .product-image {
+    max-width: 100%;
+    height: auto;
+    border: #ddd 1px solid;
+    border-radius: 5px;
+}
+
+/* Features Section */
+.features-section .feature-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.features-section .feature-item {
+    flex: 1;
+    min-width: 280px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.features-section .feature-item h3 {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Pricing Section */
+.pricing-section .pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.pricing-section .pricing-table th,
+.pricing-section .pricing-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.pricing-section .pricing-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.pricing-section .pricing-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.pricing-section .pricing-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Contact Section */
+.contact-section {
+    text-align: center;
+}
+
+.contact-section .contact-button {
+    display: inline-block;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.contact-section .contact-button:hover {
+    background: #555;
+}
+
+/* Footer Styles */
+.footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+}
