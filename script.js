@@ -1,125 +1,87 @@
-const canvas = document.getElementById('tetris');
-const context = canvas.getContext('2d');
+document.addEventListener('DOMContentLoaded', () => {
+    // --- 1. Vanta.js Background Initialization ---
+    // This creates the animated WebGL background.
+    // It's set to pause when the window is not in focus to save resources.
+    VANTA.FOG({
+        el: "#vanta-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        highlightColor: 0x00a0e9, // Corresponds to --accent-color
+        midtoneColor: 0x005bac,   // Corresponds to --primary-color
+        lowlightColor: 0xf0f4f8,  // Corresponds to --secondary-color (light)
+        baseColor: 0xffffff,     // Corresponds to --bg-color (light)
+        blurFactor: 0.60,
+        speed: 1.20,
+        zoom: 0.80
+    });
 
-context.scale(20, 20);
+    // --- 2. Dark Mode Toggle ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
 
-function arenaSweep() {
-    let rowCount = 1;
-    outer: for (let y = arena.length - 1; y > 0; --y) {
-        for (let x = 0; x < arena[y].length; ++x) {
-            if (arena[y][x] === 0) {
-                continue outer;
-            }
+    // Function to set the theme
+    const setTheme = (theme) => {
+        htmlEl.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    };
+
+    // Check for saved theme in localStorage, or use system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else if (prefersDark) {
+        setTheme('dark');
+    } else {
+        setTheme('light');
+    }
+
+    // Event listener for the toggle button
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = htmlEl.getAttribute('data-theme');
+        if (currentTheme === 'dark') {
+            setTheme('light');
+        } else {
+            setTheme('dark');
         }
+    });
 
-        const row = arena.splice(y, 1)[0].fill(0);
-        arena.unshift(row);
-        ++y;
+    // --- 3. Scroll-based Fade-in Animations ---
+    const animatedElements = document.querySelectorAll('.fade-in');
 
-        player.score += rowCount * 10;
-        rowCount *= 2;
-    }
-}
-
-function collide(arena, player) {
-    const [m, o] = [player.matrix, player.pos];
-    for (let y = 0; y < m.length; ++y) {
-        for (let x = 0; x < m[y].length; ++x) {
-            if (m[y][x] !== 0 &&
-               (arena[y + o.y] &&
-                arena[y + o.y][x + o.x]) !== 0) {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-function createMatrix(w, h) {
-    const matrix = [];
-    while (h--) {
-        matrix.push(new Array(w).fill(0));
-    }
-    return matrix;
-}
-
-function draw() {
-    context.fillStyle = '#000';
-    context.fillRect(0, 0, canvas.width, canvas.height);
-
-    drawMatrix(arena, {x: 0, y: 0});
-    drawMatrix(player.matrix, player.pos);
-}
-
-function drawMatrix(matrix, offset) {
-    matrix.forEach((row, y) => {
-        row.forEach((value, x) => {
-            if (value !== 0) {
-                context.fillStyle = 'red';
-                context.fillRect(x + offset.x,
-                                 y + offset.y,
-                                 1, 1);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // Optional: Stop observing the element once it's visible to save resources
+                observer.unobserve(entry.target);
             }
         });
+    }, {
+        rootMargin: '0px',
+        threshold: 0.1 // Trigger when 10% of the element is visible
     });
-}
 
-function merge(arena, player) {
-    player.matrix.forEach((row, y) => {
-        row.forEach((value, x) => {
-            if (value !== 0) {
-                arena[y + player.pos.y][x + player.pos.x] = value;
-            }
-        });
+    animatedElements.forEach(el => {
+        observer.observe(el);
     });
-}
 
-function playerDrop() {
-    player.pos.y++;
-    if (collide(arena, player)) {
-        player.pos.y--;
-        merge(arena, player);
-        playerReset();
-        arenaSweep();
+    // --- 4. Placeholder for Chart Rendering ---
+    // NOTE: The code below is a placeholder. It requires a charting library
+    // like Chart.js and the actual data for salary ranges.
+    const salaryChartContainer = document.getElementById('salary-chart-container');
+    if (salaryChartContainer) {
+        // Example:
+        // const ctx = salaryChartContainer.getContext('2d');
+        // const myChart = new Chart(ctx, {
+        //     type: 'bar',
+        //     data: { /* ... Nidec salary data ... */ },
+        //     options: { /* ... chart options ... */ }
+        // });
+        console.log("Salary chart would be rendered here if data were available.");
     }
-    dropCounter = 0;
-}
-
-function playerReset() {
-    const pieces = 'ILJOTSZ';
-    player.matrix = createPiece(pieces[pieces.length * Math.random() | 0]);
-    player.pos.y = 0;
-    player.pos.x = (arena[0].length / 2 | 0) -
-                   (player.matrix[0].length / 2 | 0);
-    if (collide(arena, player)) {
-        arena.forEach(row => row.fill(0));
-    }
-}
-
-let dropCounter = 0;
-let dropInterval = 1000;
-
-let lastTime = 0;
-function update(time = 0) {
-    const deltaTime = time - lastTime;
-    lastTime = time;
-
-    dropCounter += deltaTime;
-    if (dropCounter > dropInterval) {
-        playerDrop();
-    }
-
-    draw();
-    requestAnimationFrame(update);
-}
-
-const arena = createMatrix(12, 20);
-
-const player = {
-    pos: {x: 5, y: 5},
-    matrix: null,
-    score: 0,
-}
-
-playerReset();
-update();
+});

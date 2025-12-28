@@ -1,175 +1,283 @@
-/* General Body Styles */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #1a1a1a;
+    --primary-color: #005bac;
+    --secondary-color: #f0f4f8;
+    --accent-color: #00a0e9;
+    --border-color: #dde4eb;
+    --card-bg-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme='dark'] {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --primary-color: #4dabf7;
+    --secondary-color: #1e1e1e;
+    --accent-color: #00a0e9;
+    --border-color: #333333;
+    --card-bg-color: #1e1e1e;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --primary-color: #4dabf7;
+        --secondary-color: #1e1e1e;
+        --accent-color: #00a0e9;
+        --border-color: #333333;
+        --card-bg-color: #1e1e1e;
+        --shadow-color: rgba(0, 0, 0, 0.4);
+    }
+}
+
+
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background: #f4f4f4;
-    color: #333;
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#vanta-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
 .container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
+    max-width: 1100px;
+    margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Header Styles */
+/* Header */
 .header {
-    background: #333;
-    color: #fff;
-    padding: 1rem 0;
-    border-bottom: #77aaff 3px solid;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
-.header .product-name {
-    float: left;
-    margin: 0;
-    padding: 0;
+html[data-theme='dark'] .header {
+    background-color: rgba(18, 18, 18, 0.5);
 }
 
-.header .main-nav {
-    float: right;
-    margin-top: 10px;
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
 }
 
-.header .main-nav ul {
-    margin: 0;
-    padding: 0;
+.logo img {
+    height: 28px;
+    filter: var(--logo-filter, none);
+}
+
+html[data-theme='dark'] .logo img {
+    filter: invert(1) brightness(2);
+}
+
+.main-nav ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
 
-.header .main-nav li {
-    display: inline;
-    padding: 0 15px;
+.main-nav li {
+    margin-left: 30px;
 }
 
-.header .main-nav a {
-    color: #fff;
+.main-nav a {
     text-decoration: none;
-    text-transform: uppercase;
-    font-size: 16px;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
-.header .main-nav a:hover {
-    color: #77aaff;
+.main-nav a:hover {
+    color: var(--primary-color);
+}
+
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    padding: 5px;
+}
+
+/* Sections */
+main section {
+    padding: 80px 0;
+    position: relative;
+}
+
+#introduction {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#introduction h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+
+/* Tile Layout */
+.data-tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.tile {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.tile h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+}
+
+/* Specific Tile Content */
+.stat {
+    margin: 15px 0;
+}
+.stat-value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+.small-text {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.tech-tags .tag {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin: 5px 5px 5px 0;
+    font-size: 0.9rem;
+}
+
+.transparency-note {
+    text-align: center;
+    margin-top: 40px;
+    font-style: italic;
+    opacity: 0.7;
+}
+
+/* Process Section */
+.process-steps {
+    list-style: none;
+    counter-reset: steps;
+    padding-left: 0;
+    margin-top: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.process-steps li {
+    counter-increment: steps;
+    margin-bottom: 20px;
+    padding-left: 50px;
+    position: relative;
+    font-size: 1.1rem;
+}
+.process-steps li::before {
+    content: counter(steps);
+    position: absolute;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: bold;
 }
 
-/* Section Styles */
-section {
-    padding: 40px 0;
-    margin-bottom: 20px;
-    background: #fff;
-    border-bottom: #ddd 1px solid;
-}
-
-section:last-of-type {
-    border-bottom: none;
-}
-
-.section-title {
-    text-align: center;
-    color: #333;
-    margin-bottom: 30px;
-    font-size: 2em;
-}
-
-/* Hero Section */
-.hero-section {
-    text-align: center;
-    background: #e4e4e4;
-    padding: 60px 0;
-}
-
-.hero-section .catchphrase {
-    color: #333;
-    font-size: 2.5em;
-    margin-bottom: 20px;
-}
-
-.hero-section .product-image {
-    max-width: 100%;
-    height: auto;
-    border: #ddd 1px solid;
-    border-radius: 5px;
-}
-
-/* Features Section */
-.features-section .feature-list {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.features-section .feature-item {
-    flex: 1;
-    min-width: 280px;
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.features-section .feature-item h3 {
-    color: #555;
-    margin-bottom: 10px;
-}
-
-/* Pricing Section */
-.pricing-section .pricing-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.pricing-section .pricing-table th,
-.pricing-section .pricing-table td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
-
-.pricing-section .pricing-table th {
-    background-color: #f2f2f2;
-    color: #333;
-}
-
-.pricing-section .pricing-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.pricing-section .pricing-table tr:hover {
-    background-color: #f1f1f1;
-}
-
-/* Contact Section */
-.contact-section {
-    text-align: center;
-}
-
-.contact-section .contact-button {
+/* CTA Button */
+.cta-button {
     display: inline-block;
-    background: #333;
+    background-color: var(--primary-color);
     color: #fff;
-    padding: 10px 20px;
+    padding: 15px 30px;
+    border-radius: 30px;
     text-decoration: none;
-    border-radius: 5px;
-    margin-top: 15px;
+    font-weight: bold;
+    margin-top: 30px;
+    transition: background-color 0.3s;
+}
+html[data-theme='dark'] .cta-button {
+    color: var(--bg-color);
 }
 
-.contact-section .contact-button:hover {
-    background: #555;
+.cta-button:hover {
+    background-color: var(--accent-color);
 }
 
-/* Footer Styles */
+/* Footer */
 .footer {
-    background: #333;
-    color: #fff;
+    background-color: var(--secondary-color);
+    padding: 40px 0;
     text-align: center;
-    padding: 20px 0;
-    margin-top: 20px;
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #introduction h1 {
+        font-size: 2.5rem;
+    }
+    .main-nav {
+        display: none; /* Simple hiding for now, could be a hamburger menu */
+    }
 }

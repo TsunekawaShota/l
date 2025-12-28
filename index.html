@@ -3,97 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>製品紹介ランディングページ</title>
+    <title>Nidec Career Opportunities</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="vanta-bg"></div>
+
     <header class="header">
         <div class="container">
-            <h1 class="product-name">Gemini CLI Product</h1>
+            <div class="logo">
+                <img src="https://www.nidec.com/jp/-/media/nidec-com/header/logo.svg" alt="Nidec Logo">
+            </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#features">特徴</a></li>
-                    <li><a href="#pricing">価格</a></li>
-                    <li><a href="#contact">問い合わせ</a></li>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#culture">People & Culture</a></li>
+                    <li><a href="#data">Facts & Conditions</a></li>
+                    <li><a href="#process">Process</a></li>
                 </ul>
             </nav>
+            <button id="theme-toggle" class="theme-toggle-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </button>
         </div>
     </header>
 
     <main>
-        <section id="hero" class="hero-section">
+        <!-- ============================================ -->
+        <!-- Introduction Section -->
+        <!-- ============================================ -->
+        <section id="introduction" class="scroll-section">
             <div class="container">
-                <h2 class="catchphrase">あなたのビジネスを加速させる次世代CLIツール</h2>
-                <img src="https://via.placeholder.com/600x400?text=Product+Image" alt="製品イメージ" class="product-image">
+                <h1 class="fade-in">世界の潮流を、動かす。</h1>
+                <p class="fade-in">ニデックは、世界No.1の総合モーターメーカーとして、<br>社会の発展と地球環境に貢献します。</p>
+                <!-- Note: Add more compelling introductory text based on official sources -->
             </div>
         </section>
 
-        <section id="features" class="features-section">
+        <!-- ============================================ -->
+        <!-- People & Culture Section -->
+        <!-- ============================================ -->
+        <section id="culture" class="scroll-section">
             <div class="container">
-                <h2 class="section-title">製品の特徴</h2>
-                <div class="feature-list">
-                    <div class="feature-item">
-                        <h3>特徴1: 高速処理</h3>
-                        <p>CLIが提供する高速なコマンド実行により、作業効率が格段に向上します。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>特徴2: 簡単な統合</h3>
-                        <p>既存のシステムに容易に統合でき、開発プロセスをスムーズにします。</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>特徴3: 強力な拡張性</h3>
-                        <p>プラグインやカスタムスクリプトで機能を自由に拡張できます。</p>
-                    </div>
+                <h2 class="fade-in">人・文化</h2>
+                <p class="fade-in">挑戦を歓迎し、成長を支援する文化がここにはあります。</p>
+                <!-- Note: Add content about company culture, employee stories, videos, etc. -->
+                <div class="culture-gallery fade-in">
+                    <!-- Placeholder for images or video thumbnails -->
+                    <div class="gallery-item">Culture Item 1</div>
+                    <div class="gallery-item">Culture Item 2</div>
+                    <div class="gallery-item">Culture Item 3</div>
                 </div>
             </div>
         </section>
 
-        <section id="pricing" class="pricing-section">
+        <!-- ============================================ -->
+        <!-- Facts & Conditions Section -->
+        <!-- ============================================ -->
+        <section id="data" class="scroll-section">
             <div class="container">
-                <h2 class="section-title">価格プラン</h2>
-                <table class="pricing-table">
-                    <thead>
-                        <tr>
-                            <th>プラン</th>
-                            <th>月額料金</th>
-                            <th>特徴</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>基本プラン</td>
-                            <td>$10</td>
-                            <td>基本的な機能が利用可能</td>
-                        </tr>
-                        <tr>
-                            <td>プロプラン</td>
-                            <td>$30</td>
-                            <td>全機能、優先サポート</td>
-                        </tr>
-                        <tr>
-                            <td>エンタープライズ</td>
-                            <td>お見積もり</td>
-                            <td>カスタム機能、専任サポート</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2 class="fade-in">数値・条件</h2>
+                <div class="data-tiles">
+                    <!-- Salary Tile -->
+                    <div class="tile fade-in">
+                        <h3>給与</h3>
+                        <div id="salary-chart-container">
+                            <!-- Note: Chart will be rendered here by JS. Needs data. -->
+                            <p>年齢・職種別の年収レンジ（データ収集中）</p>
+                        </div>
+                        <p class="small-text">昇給率: [データ収集中]</p>
+                    </div>
+
+                    <!-- Work Style Tile -->
+                    <div class="tile fade-in">
+                        <h3>働き方</h3>
+                        <div class="stat">
+                            <span class="stat-value">[--]%</span>
+                            <span class="stat-label">リモート率</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">[有り/無し]</span>
+                            <span class="stat-label">コアタイム</span>
+                        </div>
+                        <p class="small-text">残業時間: [データ収集中]</p>
+                        <p class="small-text">有休消化率: [データ収集中]</p>
+                    </div>
+
+                    <!-- Diversity Tile -->
+                    <div class="tile fade-in">
+                        <h3>多様性</h3>
+                        <div id="diversity-infographic">
+                            <!-- Note: Infographics will be styled here. Needs data. -->
+                            <p>男女比: [データ収集中]</p>
+                            <p>中途採用比率: [データ収集中]</p>
+                            <p>管理職の多様性: [データ収集中]</p>
+                        </div>
+                    </div>
+
+                    <!-- Tech Stack Tile -->
+                    <div class="tile fade-in">
+                        <h3>技術スタック</h3>
+                        <!-- Note: Add tech stack info if available for relevant positions -->
+                        <div class="tech-tags">
+                            <span class="tag">Tag 1</span>
+                            <span class="tag">Tag 2</span>
+                            <span class="tag">Tag 3</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="transparency-note fade-in">
+                    <strong>透明性のために:</strong> 離職率やその他の課題についても情報を収集中です。
+                </p>
             </div>
         </section>
 
-        <section id="contact" class="contact-section">
+        <!-- ============================================ -->
+        <!-- Recruitment & Process Section -->
+        <!-- ============================================ -->
+        <section id="process" class="scroll-section">
             <div class="container">
-                <h2 class="section-title">お問い合わせ</h2>
-                <p>ご質問やご要望がありましたら、お気軽にお問い合わせください。</p>
-                <a href="mailto:info@example.com" class="contact-button">メールで問い合わせる</a>
+                <h2 class="fade-in">採用・プロセス</h2>
+                <!-- Note: Add information about the hiring process -->
+                <ol class="process-steps fade-in">
+                    <li>エントリー</li>
+                    <li>書類選考</li>
+                    <li>面接（複数回）</li>
+                    <li>内定</li>
+                </ol>
+                <a href="#" class="cta-button fade-in">募集中のポジションを見る</a>
             </div>
         </section>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Gemini CLI Product. All rights reserved.</p>
-            <p>会社情報: 株式会社Gemini CLI</p>
+            <!-- Note: Add official company information -->
+            <p>ニデック株式会社 (Nidec Corporation)</p>
+            <p>〒601-8205 京都市南区久世殿城町338番地</p>
+            <p>&copy; 2024 Nidec Corporation. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
