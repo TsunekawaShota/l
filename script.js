@@ -1,87 +1,147 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. Vanta.js Background Initialization ---
-    // This creates the animated WebGL background.
-    // It's set to pause when the window is not in focus to save resources.
-    VANTA.FOG({
-        el: "#vanta-bg",
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        highlightColor: 0x00a0e9, // Corresponds to --accent-color
-        midtoneColor: 0x005bac,   // Corresponds to --primary-color
-        lowlightColor: 0xf0f4f8,  // Corresponds to --secondary-color (light)
-        baseColor: 0xffffff,     // Corresponds to --bg-color (light)
-        blurFactor: 0.60,
-        speed: 1.20,
-        zoom: 0.80
-    });
+// --- ダークモード切替 ---
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+const html = document.documentElement;
 
-    // --- 2. Dark Mode Toggle ---
-    const themeToggle = document.getElementById('theme-toggle');
-    const htmlEl = document.documentElement;
-
-    // Function to set the theme
-    const setTheme = (theme) => {
-        htmlEl.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-    };
-
-    // Check for saved theme in localStorage, or use system preference
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else if (prefersDark) {
-        setTheme('dark');
+function updateParticleColor() {
+    if (html.hasAttribute('data-theme')) {
+        // ダークモード
+        particles.material.color.setHex(0xaaaaaa);
     } else {
-        setTheme('light');
+        // ライトモード
+        particles.material.color.setHex(0x555555);
+    }
+}
+
+// OSの設定を優先しつつ、localStorageに保存された設定を読み込む
+const currentTheme = localStorage.getItem('theme');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+if (currentTheme === 'dark' || (!currentTheme && prefersDark)) {
+    html.setAttribute('data-theme', 'dark');
+}
+
+darkModeToggle.addEventListener('click', () => {
+    if (html.hasAttribute('data-theme')) {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    }
+    updateParticleColor(); // 色を更新
+});
+
+
+// --- Three.js 背景アニメーション ---
+let scene, camera, renderer, particles, mouseX = 0, mouseY = 0;
+
+// 初期化処理
+function init() {
+    // シーン
+    scene = new THREE.Scene();
+
+    // カメラ
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    // レンダラー
+    renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.getElementById('webgl-canvas').appendChild(renderer.domElement);
+
+    // パーティクルの作成
+    const particleCount = 5000;
+    const particlesGeometry = new THREE.BufferGeometry();
+    const posArray = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 10;
     }
 
-    // Event listener for the toggle button
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = htmlEl.getAttribute('data-theme');
-        if (currentTheme === 'dark') {
-            setTheme('light');
-        } else {
-            setTheme('dark');
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+    const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.005,
+    });
+    
+    particles = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particles);
+
+    updateParticleColor(); // 初期の色を設定
+
+    // イベントリスナー
+    window.addEventListener('resize', onWindowResize);
+    document.addEventListener('mousemove', onMouseMove);
+
+    // アニメーション開始
+    animate();
+}
+
+// ウィンドウリサイズ処理
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+}
+
+// マウス移動処理
+function onMouseMove(event) {
+    mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+    mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+// アニメーションループ
+function animate() {
+    requestAnimationFrame(animate);
+
+    // パーティクルをゆっくり回転させる
+    particles.rotation.y += 0.0001;
+    particles.rotation.x += 0.0001;
+
+    // マウス位置に応じてカメラを少し動かす
+    camera.position.x += (mouseX * 0.05 - camera.position.x) * 0.05;
+    camera.position.y += (mouseY * 0.05 - camera.position.y) * 0.05;
+    camera.lookAt(scene.position);
+
+    renderer.render(scene, camera);
+}
+
+init();
+
+
+
+// --- スクロール連動アニメーション ---
+
+const scrollElements = document.querySelectorAll('.scroll-reveal');
+
+
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            entry.target.classList.add('visible');
+
+            observer.unobserve(entry.target);
+
         }
+
     });
 
-    // --- 3. Scroll-based Fade-in Animations ---
-    const animatedElements = document.querySelectorAll('.fade-in');
+}, {
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                // Optional: Stop observing the element once it's visible to save resources
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        rootMargin: '0px',
-        threshold: 0.1 // Trigger when 10% of the element is visible
-    });
+    threshold: 0.1
 
-    animatedElements.forEach(el => {
-        observer.observe(el);
-    });
+});
 
-    // --- 4. Placeholder for Chart Rendering ---
-    // NOTE: The code below is a placeholder. It requires a charting library
-    // like Chart.js and the actual data for salary ranges.
-    const salaryChartContainer = document.getElementById('salary-chart-container');
-    if (salaryChartContainer) {
-        // Example:
-        // const ctx = salaryChartContainer.getContext('2d');
-        // const myChart = new Chart(ctx, {
-        //     type: 'bar',
-        //     data: { /* ... Nidec salary data ... */ },
-        //     options: { /* ... chart options ... */ }
-        // });
-        console.log("Salary chart would be rendered here if data were available.");
-    }
+
+
+scrollElements.forEach(el => {
+
+    observer.observe(el);
+
 });

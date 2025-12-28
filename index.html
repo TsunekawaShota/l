@@ -3,149 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nidec Career Opportunities</title>
+    <title>Nidec 採用ランディングページ</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="vanta-bg"></div>
-
+    <div id="webgl-canvas"></div>
     <header class="header">
         <div class="container">
-            <div class="logo">
-                <img src="https://www.nidec.com/jp/-/media/nidec-com/header/logo.svg" alt="Nidec Logo">
-            </div>
-            <nav class="main-nav">
+            <h1 class="logo">Nidec</h1>
+            <nav class="global-nav">
                 <ul>
-                    <li><a href="#introduction">Introduction</a></li>
-                    <li><a href="#culture">People & Culture</a></li>
-                    <li><a href="#data">Facts & Conditions</a></li>
-                    <li><a href="#process">Process</a></li>
+                    <li><a href="#hero">TOP</a></li>
+                    <li><a href="#culture">CULTURE</a></li>
+                    <li><a href="#data">DATA</a></li>
+                    <li><a href="#process">PROCESS</a></li>
                 </ul>
             </nav>
-            <button id="theme-toggle" class="theme-toggle-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            </button>
+            <button id="dark-mode-toggle">モード切替</button>
         </div>
     </header>
 
-    <main>
-        <!-- ============================================ -->
-        <!-- Introduction Section -->
-        <!-- ============================================ -->
-        <section id="introduction" class="scroll-section">
+    <main class="content">
+        <section id="hero" class="hero-section">
             <div class="container">
-                <h1 class="fade-in">世界の潮流を、動かす。</h1>
-                <p class="fade-in">ニデックは、世界No.1の総合モーターメーカーとして、<br>社会の発展と地球環境に貢献します。</p>
-                <!-- Note: Add more compelling introductory text based on official sources -->
+                <h2>世界を軽やかに動かす、<br>その原動力になる。</h2>
+                <p>ニデックは、精密小型から超大型まで、<br>世界中のあらゆるモーターで社会を支えています。<br>あなたの情熱で、未来を動かしませんか。</p>
             </div>
         </section>
 
-        <!-- ============================================ -->
-        <!-- People & Culture Section -->
-        <!-- ============================================ -->
-        <section id="culture" class="scroll-section">
+        <section id="culture" class="culture-section">
             <div class="container">
-                <h2 class="fade-in">人・文化</h2>
-                <p class="fade-in">挑戦を歓迎し、成長を支援する文化がここにはあります。</p>
-                <!-- Note: Add content about company culture, employee stories, videos, etc. -->
-                <div class="culture-gallery fade-in">
-                    <!-- Placeholder for images or video thumbnails -->
-                    <div class="gallery-item">Culture Item 1</div>
-                    <div class="gallery-item">Culture Item 2</div>
-                    <div class="gallery-item">Culture Item 3</div>
+                <h3 class="section-title">人・文化</h3>
+                <div class="story-container">
+                    <div class="story-item scroll-reveal">
+                        <h4>1. 情熱、熱意、執念</h4>
+                        <p>私たちは、何事にも情熱と熱意をもって取り組み、最後までやり遂げる執念を大切にしています。この精神が、困難な課題を乗り越える原動力となります。</p>
+                    </div>
+                    <div class="story-item scroll-reveal">
+                        <h4>2. 知的ハードワーキング</h4>
+                        <p>長時間働くことだけが全てではありません。知恵を絞り、工夫を凝らし、誰よりも効率的に働く「知的ハードワーキング」を追求しています。</p>
+                    </div>
+                    <div class="story-item scroll-reveal">
+                        <h4>3. すぐやる、必ずやる、出来るまでやる</h4>
+                        <p>スピードは競争力の源泉です。決めたことはすぐに行動に移し、一度始めたことは必ずやり遂げ、出来るまで諦めない。この徹底した実行力が私たちの強みです。</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ============================================ -->
-        <!-- Facts & Conditions Section -->
-        <!-- ============================================ -->
-        <section id="data" class="scroll-section">
+        <section id="data" class="data-section">
             <div class="container">
-                <h2 class="fade-in">数値・条件</h2>
-                <div class="data-tiles">
-                    <!-- Salary Tile -->
-                    <div class="tile fade-in">
-                        <h3>給与</h3>
-                        <div id="salary-chart-container">
-                            <!-- Note: Chart will be rendered here by JS. Needs data. -->
-                            <p>年齢・職種別の年収レンジ（データ収集中）</p>
-                        </div>
-                        <p class="small-text">昇給率: [データ収集中]</p>
+                <h3 class="section-title">数値・条件</h3>
+                <div class="data-grid">
+                    <div class="data-tile">
+                        <h4>初任給 (2024年度実績)</h4>
+                        <p>学部卒: 223,500円/月</p>
+                        <p>修士了: 248,500円/月</p>
+                        <p>博士了: 266,500円/月</p>
                     </div>
-
-                    <!-- Work Style Tile -->
-                    <div class="tile fade-in">
-                        <h3>働き方</h3>
-                        <div class="stat">
-                            <span class="stat-value">[--]%</span>
-                            <span class="stat-label">リモート率</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-value">[有り/無し]</span>
-                            <span class="stat-label">コアタイム</span>
-                        </div>
-                        <p class="small-text">残業時間: [データ収集中]</p>
-                        <p class="small-text">有休消化率: [データ収集中]</p>
+                    <div class="data-tile">
+                        <h4>休日・休暇</h4>
+                        <p>年間休日121日 (2022年度実績)</p>
+                        <p>完全週休2日制、GW、夏季、年末年始</p>
                     </div>
-
-                    <!-- Diversity Tile -->
-                    <div class="tile fade-in">
-                        <h3>多様性</h3>
-                        <div id="diversity-infographic">
-                            <!-- Note: Infographics will be styled here. Needs data. -->
-                            <p>男女比: [データ収集中]</p>
-                            <p>中途採用比率: [データ収集中]</p>
-                            <p>管理職の多様性: [データ収集中]</p>
-                        </div>
+                    <div class="data-tile">
+                        <h4>働き方</h4>
+                        <p>平均残業時間: 19.3h/月 (2024年度)</p>
+                        <p>有給休暇取得率: 64.9% (2024年度)</p>
+                        <p>在宅・時差勤務制度あり</p>
                     </div>
-
-                    <!-- Tech Stack Tile -->
-                    <div class="tile fade-in">
-                        <h3>技術スタック</h3>
-                        <!-- Note: Add tech stack info if available for relevant positions -->
-                        <div class="tech-tags">
-                            <span class="tag">Tag 1</span>
-                            <span class="tag">Tag 2</span>
-                            <span class="tag">Tag 3</span>
-                        </div>
+                    <div class="data-tile">
+                        <h4>多様性 (2024年度)</h4>
+                        <p>女性社員比率(連結): 46.6%</p>
+                        <p>女性管理職比率(連結): 21.9%</p>
+                        <p>障がい者雇用率(単体): 2.79%</p>
+                    </div>
+                    <div class="data-tile">
+                        <h4>中途採用比率 (2024年度)</h4>
+                        <p class="large-text">46%</p>
+                    </div>
+                    <div class="data-tile">
+                        <h4>福利厚生</h4>
+                        <p>借上げ社宅制度、確定拠出年金、財形貯蓄、従業員持株会など</p>
                     </div>
                 </div>
-                <p class="transparency-note fade-in">
-                    <strong>透明性のために:</strong> 離職率やその他の課題についても情報を収集中です。
-                </p>
             </div>
         </section>
 
-        <!-- ============================================ -->
-        <!-- Recruitment & Process Section -->
-        <!-- ============================================ -->
-        <section id="process" class="scroll-section">
+        <section id="process" class="process-section">
             <div class="container">
-                <h2 class="fade-in">採用・プロセス</h2>
-                <!-- Note: Add information about the hiring process -->
-                <ol class="process-steps fade-in">
-                    <li>エントリー</li>
-                    <li>書類選考</li>
-                    <li>面接（複数回）</li>
-                    <li>内定</li>
-                </ol>
-                <a href="#" class="cta-button fade-in">募集中のポジションを見る</a>
+                <h3 class="section-title">採用・プロセス</h3>
+                <div class="process-container">
+                    <div class="process-flow">
+                        <h4>選考フロー</h4>
+                        <ol>
+                            <li><span>1.</span> エントリー</li>
+                            <li><span>2.</span> 会社説明会 (Web/対面)</li>
+                            <li><span>3.</span> 書類選考・適性検査</li>
+                            <li><span>4.</span> 面接 (複数回)</li>
+                            <li><span>5.</span> 内々定</li>
+                        </ol>
+                    </div>
+                    <div class="job-category">
+                        <h4>募集職種</h4>
+                        <ul>
+                            <li><b>技術系:</b> 研究開発、製品設計、生産技術、品質保証など</li>
+                            <li><b>事務系:</b> 営業、経理、法務、人事、経営企画など</li>
+                        </ul>
+                        <a href="https://www.nidec.com/jp/recruit/" class="button-apply" target="_blank" rel="noopener noreferrer">エントリーはこちら</a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <!-- Note: Add official company information -->
-            <p>ニデック株式会社 (Nidec Corporation)</p>
-            <p>〒601-8205 京都市南区久世殿城町338番地</p>
-            <p>&copy; 2024 Nidec Corporation. All rights reserved.</p>
+            <div class="company-info">
+                <h4>ニデック株式会社 (NIDEC CORPORATION)</h4>
+                <p>〒601-8205 京都市南区久世殿城町338番地</p>
+                <a href="https://www.nidec.com/jp/" target="_blank" rel="noopener noreferrer">公式サイト</a>
+            </div>
+            <p class="copyright">&copy; 2024 NIDEC CORPORATION. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
